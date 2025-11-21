@@ -55,10 +55,11 @@ header div{
 
 #p1{
     width:100vw;
-    position:fixed;
     top:65px;
     left:0;
     height:auto;
+    display:block;
+
     
 }
 #cun{
