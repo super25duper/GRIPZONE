@@ -52,13 +52,14 @@ header div{
     align-items:center ;
     gap:10px;
 }
-#p1 {
-    position: fixed;
-    top: 65px;
-    left: 0;
-    width: 100vw;
-    height: calc(100vh - 65px);
-    object-fit: cover;
+
+
+#p1{
+    width:100vw;
+    position:fixed;
+    top:65px;
+    left:0;
+    
 }
 
     
@@ -88,13 +89,12 @@ header div{
 
 #about {
     background-color: rgba(5, 5, 20, 1);
-    margin-top: -20px;
     z-index: 5;
     position: relative;
     min-height: 120vh;
     border-top-left-radius: 20px;
     border-top-right-radius:20px;
-    margin-top:255px;
+    margin-top:320px;
     padding:18px;
     direction:rtl;
     color:rgba(230,255,230,0.7);
