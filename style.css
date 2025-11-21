@@ -52,12 +52,14 @@ header div{
     align-items:center ;
     gap:10px;
 }
-
-#p1{
-    width:100vw;
-    top:65px;
-    left:0;
-    position:fixed;
+#p1 {
+    position: fixed;
+    top: 65px;
+    left: 0;
+    width: 100vw;
+    height: calc(100vh - 65px);
+    object-fit: cover;
+}
 
     
 }
