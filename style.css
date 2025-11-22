@@ -5,21 +5,23 @@ body {
 header{
     background-color:rgba(5,5,20,1);
     margin:0;
-    height:65px;
+    padding: 10px 10px;
     display:flex;
     flex-direction:row;
     align-items:center ;
     justify-content:space-between;
     top:0;
     left:0;
-    width:100vw;
+    width:100%;
     position:fixed;
     z-index:6;
     box-shadow:0 0 55px 5px rgba(230,255,200,0.8);
+    box-sizing: border-box;
 }
 #A{
     margin:7px;
     color:rgba(230,255,200,0.8);
+    font-family: sans-serif;
     
 }
 #menu{
@@ -29,7 +31,7 @@ header{
     flex-direction:column;
     gap:4px;
     align-items:center;
-    margin:15px;
+    margin:5px;
     justify-content:center;
     
     
@@ -61,9 +63,6 @@ header div{
     left:0;
     
 }
-
-    
-}
 #cun{
     position:absolute;
     width:100%;
@@ -89,12 +88,13 @@ header div{
 
 #about {
     background-color: rgba(5, 5, 20, 1);
+    margin-top: -20px;
     z-index: 5;
     position: relative;
     min-height: 120vh;
     border-top-left-radius: 20px;
     border-top-right-radius:20px;
-    margin-top:320px;
+    margin-top:255px;
     padding:18px;
     direction:rtl;
     color:rgba(230,255,230,0.7);
