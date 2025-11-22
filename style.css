@@ -21,7 +21,7 @@ header{
 #A{
     margin:7px;
     color:rgba(230,255,200,0.8);
-    font-family: sans-serif;
+    font-family: sans;
     
 }
 #menu{
@@ -94,7 +94,7 @@ header div{
     min-height: 120vh;
     border-top-left-radius: 20px;
     border-top-right-radius:20px;
-    margin-top:255px;
+    margin-top:31vh;
     padding:18px;
     direction:rtl;
     color:rgba(230,255,230,0.7);
@@ -122,4 +122,14 @@ h2{
 footer{
     background-color:rgba(5,5,20,1);
     height:150px;
+}
+#hero {
+    position: fixed;
+    top: 65px;
+    left: 0;
+    width: 100%;
+    height: 27vh; /* לדוגמה — גובה רספונסיבי */
+    background-image: url("https://stam77.wordpress.com/wp-content/uploads/2025/07/lv_0_202507110733292812928629281299216535056530668430.jpg?w=768");
+    background-size: cover;
+    background-position: center;
 }
