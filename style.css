@@ -130,7 +130,7 @@ footer{
     left: 0;
     width: 100%;
     height: 27vh; /* לדוגמה — גובה רספונסיבי */
-    background-image: url("/files/p1.jpg");
+    background-image: url("/files/index/p1.jpg");
     background-size: cover;
     background-position: center;
 }
