@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>OneSignal Web Push Example</title>
+
+<!-- טוען את הסקריפט של OneSignal -->
+<script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
+
+<script>
+  window.OneSignal = window.OneSignal || [];
+  OneSignal.push(function() {
+    OneSignal.init({
+      appId: "APP_ID_HERE",            // ← להכניס כאן את ה-App ID
+      allowLocalhostAsSecureOrigin: true  // מאפשר לבדוק על localhost
+    });
+  });
+</script>
+
+</head>
+<body>
+
+<h1>OneSignal Web Push</h1>
+<button id="subscribeBtn">בקש הרשאת התראות</button>
+
+<script>
+  // לחצן ידני לבקשת הרשאה
+  document.getElementById("subscribeBtn").onclick = function() {
+    OneSignal.push(function() {
+      OneSignal.showSlidedownPrompt(); // פותח חלון בקשת הרשאה
+    });
+  };
+</script>
+
+</body>
+</html>
