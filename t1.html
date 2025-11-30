@@ -5,14 +5,12 @@
 <title>OneSignal Web Push Example</title>
 
 <!-- טוען את הסקריפט של OneSignal -->
-<script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
-
+<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
 <script>
-  window.OneSignal = window.OneSignal || [];
-  OneSignal.push(function() {
-    OneSignal.init({
-      appId: "APP_ID_HERE",            // ← להכניס כאן את ה-App ID
-      allowLocalhostAsSecureOrigin: true  // מאפשר לבדוק על localhost
+  window.OneSignalDeferred = window.OneSignalDeferred || [];
+  OneSignalDeferred.push(async function(OneSignal) {
+    await OneSignal.init({
+      appId: "c58ee353-db79-4860-aeaa-5f992f6824b4",
     });
   });
 </script>
