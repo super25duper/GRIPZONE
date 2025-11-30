@@ -1,0 +1,30 @@
+<!DOCTYPE html><html lang="he">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>העלאת תמונה - ניסוי</title>
+  <style>
+    body { font-family: Arial, sans-serif; text-align: center; padding: 50px; }
+    input { margin: 20px 0; }
+    img { max-width: 80%; margin-top: 20px; border: 2px solid #ccc; padding: 10px; }
+  </style>
+</head>
+<body>
+  <h1>העלאת תמונה - ניסוי</h1>
+  <input type="file" id="imageInput" accept="image/*">
+  <div id="preview"></div>  <script>
+    const input = document.getElementById('imageInput');
+    const preview = document.getElementById('preview');
+
+    input.addEventListener('change', (event) => {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          preview.innerHTML = `<img src="${e.target.result}" alt="Preview">`;
+        }
+        reader.readAsDataURL(file);
+      }
+    });
+  </script></body>
+</html>
