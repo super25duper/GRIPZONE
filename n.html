@@ -1,30 +1,40 @@
 <!DOCTYPE html><html lang="he">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>העלאת תמונה - ניסוי</title>
-  <style>
-    body { font-family: Arial, sans-serif; text-align: center; padding: 50px; }
-    input { margin: 20px 0; }
-    img { max-width: 80%; margin-top: 20px; border: 2px solid #ccc; padding: 10px; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>בדיקת כניסה בטביעת אצבע</title>
 </head>
-<body>
-  <h1>העלאת תמונה - ניסוי</h1>
-  <input type="file" id="imageInput" accept="image/*">
-  <div id="preview"></div>  <script>
-    const input = document.getElementById('imageInput');
-    const preview = document.getElementById('preview');
+<body style="font-family: Arial; text-align:center; padding:50px;">
+<h1>בדיקת כניסה עם טביעת אצבע</h1>
+<button id="fingerprintBtn">בדוק טביעת אצבע</button>
+<p id="status" style="margin-top:20px;"></p><script>
+const status = document.getElementById('status');
+const btn = document.getElementById('fingerprintBtn');
 
-    input.addEventListener('change', (event) => {
-      const file = event.target.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-          preview.innerHTML = `<img src="${e.target.result}" alt="Preview">`;
+btn.addEventListener('click', async () => {
+    if (!window.PublicKeyCredential) {
+        status.textContent = "הדפדפן שלך אינו תומך ב-WebAuthn.";
+        return;
+    }
+
+    try {
+        // יצירת קריאה דמה ל-WebAuthn
+        const publicKey = {
+            challenge: new Uint8Array(32), // דמה
+            rp: { name: "Demo" },
+            user: { id: new Uint8Array(16), name: "demo", displayName: "Demo User" },
+            pubKeyCredParams: [{ type: "public-key", alg: -7 }],
+            timeout: 60000,
+            attestation: "none"
+        };
+
+        const credential = await navigator.credentials.create({ publicKey });
+        if (credential) {
+            status.textContent = "טביעת אצבע זוהתה בהצלחה!";
         }
-        reader.readAsDataURL(file);
-      }
-    });
-  </script></body>
+    } catch (err) {
+        status.textContent = "ניסיון כניסה נכשל: " + err;
+    }
+});
+</script></body>
 </html>
