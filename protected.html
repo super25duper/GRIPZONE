@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="he">
+<!DOCTYPE html><html lang="he">
 <head>
     <meta charset="UTF-8">
     <title>משאב מוגן</title>
@@ -9,26 +8,43 @@
         .ok { color: green; font-size: 22px; }
     </style>
 </head>
-<body>
-
-<h2>בדיקת גישה</h2>
-<div id="status">בודק גישה...</div>
-
-<script>
-    // 1. קבל את הפרמטרים מה-URL
+<body><h2>בדיקת גישה</h2>
+<div id="status">בודק גישה...</div><script>
+    // קבלת הפרמטרים מה-URL
     const urlParams = new URLSearchParams(window.location.search);
     const token = urlParams.get("token");
+    const username = urlParams.get("username"); // צריך לשלוח מ-Kodular
 
-    // 2. אם אין token — חסימה מיידית
-    if (!token) {
-        document.getElementById("status").innerHTML =
-            "<span class='error'>גישה חסומה (אין טוקן)</span>";
-        throw new Error("No token");
+    const statusDiv = document.getElementById("status");
+
+    if (!token || !username) {
+        statusDiv.innerHTML = "<span class='error'>גישה חסומה (אין טוקן או שם משתמש)</span>";
+        throw new Error("No token or username");
     }
 
-    // אם יש token — עוברים לשלב אימות מול פיירבייס
-    document.getElementById("status").innerText = "נמצא טוקן. מאמת מול פיירבייס...";
-</script>
+    statusDiv.innerText = "נמצא טוקן. בודק מול Firebase...";
 
-</body>
+    // URL של Firebase Realtime Database שלך
+    const firebaseUrl = `https://YOUR_PROJECT_ID.firebaseio.com/users/${username}.json`;
+
+    fetch(firebaseUrl)
+        .then(response => response.json())
+        .then(data => {
+            if (!data) {
+                statusDiv.innerHTML = "<span class='error'>משתמש לא קיים</span>";
+                return;
+            }
+
+            if (data.token === token && data.approved === true) {
+                statusDiv.innerHTML = "<span class='ok'>ברוך הבא! המשאב מוצג:</span>" +
+                    "<div style='width:100px;height:100px;background:green;margin-top:10px;'></div>";
+            } else {
+                statusDiv.innerHTML = "<span class='error'>גישה חסומה (token לא חוקי או לא מאושר)</span>";
+            }
+        })
+        .catch(err => {
+            console.error(err);
+            statusDiv.innerHTML = "<span class='error'>שגיאה בטעינת הנתונים</span>";
+        });
+</script></body>
 </html>
