@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+    <meta charset="UTF-8">
+    <title>משאב מוגן</title>
+    <style>
+        body { font-family: Arial; padding: 20px; }
+        .error { color: red; font-weight: bold; }
+        .ok { color: green; font-size: 22px; }
+    </style>
+</head>
+<body>
+
+<h2>בדיקת גישה</h2>
+<div id="status">בודק גישה...</div>
+
+<script>
+    // 1. קבל את הפרמטרים מה-URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const token = urlParams.get("token");
+
+    // 2. אם אין token — חסימה מיידית
+    if (!token) {
+        document.getElementById("status").innerHTML =
+            "<span class='error'>גישה חסומה (אין טוקן)</span>";
+        throw new Error("No token");
+    }
+
+    // אם יש token — עוברים לשלב אימות מול פיירבייס
+    document.getElementById("status").innerText = "נמצא טוקן. מאמת מול פיירבייס...";
+</script>
+
+</body>
+</html>
