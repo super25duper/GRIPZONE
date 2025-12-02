@@ -10,32 +10,34 @@
 </head>
 <body><h2>בדיקת גישה</h2>
 <div id="status">בודק גישה...</div><script>
-    // קבלת הפרמטרים מה-URL
+    // קבלת token מה-URL (מ-Kodular)
     const urlParams = new URLSearchParams(window.location.search);
     const token = urlParams.get("token");
-    const username = urlParams.get("username"); // צריך לשלוח מ-Kodular
 
     const statusDiv = document.getElementById("status");
 
-    if (!token || !username) {
-        statusDiv.innerHTML = "<span class='error'>גישה חסומה (אין טוקן או שם משתמש)</span>";
-        throw new Error("No token or username");
+    if (!token) {
+        statusDiv.innerHTML = "<span class='error'>גישה חסומה (אין טוקן)</span>";
+        throw new Error("No token");
     }
 
     statusDiv.innerText = "נמצא טוקן. בודק מול Firebase...";
 
     // URL של Firebase Realtime Database שלך
-    const firebaseUrl = `https://big-one-92549-default-rtdb.firebaseio.com/users/${username}.json`;
+    const firebaseUrl = `https://big-one-92549-default-rtdb.firebaseio.com/users.json`;
 
     fetch(firebaseUrl)
-        .then(response => response.json())
+        .then(res => res.json())
         .then(data => {
-            if (!data) {
-                statusDiv.innerHTML = "<span class='error'>משתמש לא קיים</span>";
-                return;
+            let found = false;
+            for (let key in data) {
+                if (data[key].token === token && data[key].approved === true) {
+                    found = true;
+                    break;
+                }
             }
 
-            if (data.token === token && data.approved === true) {
+            if (found) {
                 statusDiv.innerHTML = "<span class='ok'>ברוך הבא! המשאב מוצג:</span>" +
                     "<div style='width:100px;height:100px;background:green;margin-top:10px;'></div>";
             } else {
