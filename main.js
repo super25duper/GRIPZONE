@@ -9,6 +9,6 @@ const cm = document.getElementById("cm");
   } else {
     menu.style.right = "-340px";
     os.style.opacity = "0";
-    cm.style.zIndex = "0";
+    cm.style.zIndex = "-1";
   }
 }
